@@ -9,10 +9,11 @@ export interface AppProps {
 }
 
 export interface AppState {
+    "gameState":String;
     "firstPlayer":String;
     "difficulty":String;
-    "playerSymbol":String;
-    "aiSymbol":String;
+    "pSymbol":String;
+    "cSymbol":String;
     "boardMap":String[];
 }
 
@@ -20,10 +21,11 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = { 
-      "firstPlayer":"ai",
-      "difficulty":"easy",
-      "playerSymbol":"X",
-      "aiSymbol":"O",
+      "gameState":"your turn",
+      "firstPlayer":"c",
+      "difficulty":"hard",
+      "pSymbol":"X",
+      "cSymbol":"O",
       "boardMap":new Array(9).fill("e"),
     };
   }

@@ -14,20 +14,77 @@ const findPairs = (cells:number[]):number[][] => {
     return foundPairs;
 }
 
-const processInput = (cell:number,state:AppState):AppState => {
-    let pMap:String[] = new Array(9).fill("e");
-    let cMap:String[] = new Array(9).fill("e");
-    state.boardMap.forEach((e,i)=>{
-        if (e==="p") { pMap[i] = e }
-        if (e==="c") { cMap[i] = e }
+const winCheck = (cells:number[]):number[][] => {
+    let foundWins:number[][] = [];
+    winningCells.forEach(e=>{
+        if (cells.includes(e[0]) && cells.includes(e[1]) && cells.includes(e[2])) { 
+            foundWins.push(e);
+        }
     })
-    console.log(findPairs([1,2]))
-    return {
-        "firstPlayer":"ai",
-        "difficulty":"easy",
-        "playerSymbol":"X",
-        "aiSymbol":"O",
-        "boardMap":new Array(9).fill("e")
-    };
+    return foundWins;
+}
+
+const processInput = (cell:number,state:AppState):AppState => {
+    let newState:AppState = state;
+    let pCells:number[] = [];
+    let cCells:number[] = [];
+    newState.boardMap.forEach((e,i)=>{
+        if (e==="p") { pCells.push(i); } 
+        if (e==="c") { cCells.push(i); }
+    })
+    if (pCells.includes(cell) || cCells.includes(cell) || newState.gameState !== "your turn") {
+        return newState;
+    }
+    else {
+        pCells.push(cell);
+        newState.boardMap[cell] = "p";
+    }
+    const pWin:number[][] = winCheck(pCells)
+    if (pWin.length > 0) { 
+        newState.gameState = "you win!";
+    }
+    let possibleMoves:number[] = [];
+    let allPairs:number[][] = findPairs(cCells).concat(findPairs(pCells));
+    if (allPairs.length > 0) {
+        allPairs.forEach(e=>{
+            e.forEach(i=>{
+                if (!cCells.includes(i) && !pCells.includes(i)) { possibleMoves.push(i);}
+            })
+        })
+    }
+    let bestMoves = [4,0,2,6,8,1,3,5,7];
+    if (newState.difficulty === "easy") {
+        bestMoves = bestMoves.reverse();
+    }
+    let cCell:number = -1;
+    if (pCells.length === 0 
+        && cCells.length === 0 
+        && newState.firstPlayer === "c") {
+            cCell = (newState.difficulty === "easy") ?
+            bestMoves[Math.ceil(Math.random()*(bestMoves.length-1))] :
+            bestMoves[0];
+    }
+    else {
+        bestMoves.forEach(e=>{
+            if (!cCells.includes(e) && !pCells.includes(e) && !possibleMoves.includes(e)) {
+                possibleMoves.push(e);
+            }
+        });
+        if (possibleMoves[0]) {
+            cCell = possibleMoves[0];
+        }
+    }
+    if (cCell !== -1) {
+        console.log(cCell);
+        cCells.push(cCell);
+        newState.boardMap[cCell] = "c";
+    }
+    if (winCheck(cCells).length>0) {
+        newState.gameState = "you lost!";
+    }
+    if (cCells.length + pCells.length === 9) {
+        newState.gameState = "nobody won";
+    }
+    return newState;
 };
 export default processInput;

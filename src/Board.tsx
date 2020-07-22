@@ -12,7 +12,7 @@ class Board extends React.Component<BoardProps, BoardState> {
     render() { 
         return (
             <div>
-                <h2>Game status: your turn!</h2>
+                <h2>Game status: {this.props.gameState}</h2>
                 <div id="gameBoard">
                 {this.props["boardMap"].map((e,i)=>{
                     //TODO: update className based on contents of cell and gameStatus
