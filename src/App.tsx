@@ -29,14 +29,7 @@ class App extends React.Component<AppProps, AppState> {
   }
   updateBoard = (input:number)=> {
     const newState = processInput(input,this.state);
-    console.log(newState);
-    this.setState({
-      "firstPlayer":"ai",
-      "difficulty":"hard",
-      "playerSymbol":"O",
-      "aiSymbol":"X",
-      "boardMap":new Array(9).fill("e")
-    })
+    this.setState(newState)
   }
   render() { 
     return (

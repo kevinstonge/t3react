@@ -28,3 +28,7 @@ html,body {
 .thinking {
   cursor: not-allowed;
 }
+
+.taken {
+  cursor: default;
+}
