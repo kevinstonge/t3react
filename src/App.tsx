@@ -33,13 +33,23 @@ class App extends React.Component<AppProps, AppState> {
     const newState = processInput(input,this.state);
     this.setState(newState)
   }
+  changeSetting = (setting:String) => {
+    let newSettings:AppState = this.state;
+    if (setting==="newGame") {
+        newSettings.boardMap.fill("e");
+        newSettings.gameState="your turn";
+    }
+    if (setting==="difficulty") {
+        newSettings.difficulty = (newSettings.difficulty==="easy") ? "hard" : "easy";
+    }
+    this.setState(newSettings);
+}
   render() { 
     return (
       <div className="App">
         <h1>T3 - ReactJS (--typescript)</h1>
         <Board {...this.state} update={this.updateBoard}/>
-        <Settings />
-        <button onClick={()=>console.log(this.updateBoard(3))}>test</button>
+        <Settings {...this.state} updateSettings={this.changeSetting}/>
       </div>
     );
   }

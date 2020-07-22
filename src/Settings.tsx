@@ -1,6 +1,8 @@
 import React from 'react';
-export interface SettingsProps {
-    
+import { AppState } from "./App";
+
+export interface SettingsProps extends AppState {
+    updateSettings:Function;
 }
  
 export interface SettingsState {
@@ -8,12 +10,15 @@ export interface SettingsState {
 }
  
 class Settings extends React.Component<SettingsProps, SettingsState> {
-    // constructor(props: SettingsProps) {
-    //     super(props);
-    //     // this.state = { :  };
-    // }
     render() { 
-        return (<h2>settings</h2>);
+        const oppositeDifficulty = (this.props.difficulty==="easy") ? "hard" : "easy";
+        return (
+            <div>
+                <h2>options:</h2>
+                <button onClick={()=>this.props.updateSettings("newGame")}>new game</button>
+                <button onClick={()=>this.props.updateSettings("difficulty")}>set difficulty to {oppositeDifficulty}</button>
+            </div>
+        );
     }
 }
  

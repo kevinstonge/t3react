@@ -6,7 +6,7 @@ const findPairs = (cells:number[]):number[][] => {
     let foundPairs:number[][] = [];
     winningCells.forEach(winningSet=>{
         let count:number = 0;
-        cells.forEach((cell)=>{
+        cells.forEach((cell:number)=>{
             if (winningSet.includes(cell)) { count++; }
             if (count === 2) { foundPairs.push(winningSet)}
         })
@@ -16,7 +16,7 @@ const findPairs = (cells:number[]):number[][] => {
 
 const winCheck = (cells:number[]):number[][] => {
     let foundWins:number[][] = [];
-    winningCells.forEach(e=>{
+    winningCells.forEach((e:number[])=>{
         if (cells.includes(e[0]) && cells.includes(e[1]) && cells.includes(e[2])) { 
             foundWins.push(e);
         }
@@ -28,7 +28,7 @@ const processInput = (cell:number,state:AppState):AppState => {
     let newState:AppState = state;
     let pCells:number[] = [];
     let cCells:number[] = [];
-    newState.boardMap.forEach((e,i)=>{
+    newState.boardMap.forEach((e:String,i:number)=>{
         if (e==="p") { pCells.push(i); } 
         if (e==="c") { cCells.push(i); }
     })
@@ -42,6 +42,7 @@ const processInput = (cell:number,state:AppState):AppState => {
     const pWin:number[][] = winCheck(pCells)
     if (pWin.length > 0) { 
         newState.gameState = "you win!";
+        return newState;
     }
     let possibleMoves:number[] = [];
     let allPairs:number[][] = findPairs(cCells).concat(findPairs(pCells));
@@ -65,7 +66,7 @@ const processInput = (cell:number,state:AppState):AppState => {
             bestMoves[0];
     }
     else {
-        bestMoves.forEach(e=>{
+        bestMoves.forEach((e:number)=>{
             if (!cCells.includes(e) && !pCells.includes(e)) {
                 possibleMoves.push(e);
             }
