@@ -19,11 +19,15 @@ class App extends React.Component<AppProps, appState> {
       "second":true
     };
   }
+  update = ()=> {
+    this.setState({"first":false,"second":true})
+  }
   render() { 
     return (
       <div className="App">
-        <h1>Tic Tac Toe - ReactJS (--typescript)</h1>
-        <Board {this.state<appState>}/>
+        <h1>T3 - ReactJS (--typescript)</h1>
+        <Board appstate={this.state}/>
+        <button onClick={this.update}>test</button>
       </div>
     );
   }

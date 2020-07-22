@@ -1,8 +1,10 @@
 import React from "react";
 
 export interface appState {
-    "first":Boolean;
-    "second":Boolean;
+    "appstate": {
+        "first":Boolean;
+        "second":Boolean;
+    }
 }
  
 export interface BoardState {
