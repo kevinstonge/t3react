@@ -66,16 +66,15 @@ const processInput = (cell:number,state:AppState):AppState => {
     }
     else {
         bestMoves.forEach(e=>{
-            if (!cCells.includes(e) && !pCells.includes(e) && !possibleMoves.includes(e)) {
+            if (!cCells.includes(e) && !pCells.includes(e)) {
                 possibleMoves.push(e);
             }
         });
-        if (possibleMoves[0]) {
+        if (possibleMoves[0]>-1) {
             cCell = possibleMoves[0];
         }
     }
     if (cCell !== -1) {
-        console.log(cCell);
         cCells.push(cCell);
         newState.boardMap[cCell] = "c";
     }

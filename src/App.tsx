@@ -22,7 +22,7 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = { 
       "gameState":"your turn",
-      "firstPlayer":"c",
+      "firstPlayer":"p",
       "difficulty":"hard",
       "pSymbol":"X",
       "cSymbol":"O",
