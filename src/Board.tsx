@@ -1,27 +1,23 @@
 import React from "react";
+import { AppState } from "./App";
+export interface BoardProps extends AppState {
+    update:Function;
+}
 
-export interface appState {
-    "appstate": {
-        "first":Boolean;
-        "second":Boolean;
-    }
-}
- 
 export interface BoardState {
-    "boardMap":Boolean[]
+    "null":String
 }
  
-class Board extends React.Component<appState, BoardState> {
-    constructor(props: appState) {
-        super(props);
-        this.state = { "boardMap":new Array(9).fill(false) };
-    }
+class Board extends React.Component<BoardProps, BoardState> {
     render() { 
         return (
             <div>
-                <p>{this.state["boardMap"]}</p>
-                <p>{JSON.stringify(this.state)}</p>
-                <p>{JSON.stringify(this.props)}</p>
+                <h2>Game status: your turn!</h2>
+                <div id="gameBoard">
+                {this.props["boardMap"].map(e=>{
+                    return(<div className="gameCell">{e}</div>)
+                })}
+                </div>
             </div>
         );
     }

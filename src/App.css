@@ -6,3 +6,25 @@ html,body {
   background-color: #222;
   color: #eee;
 }
+
+#gameBoard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gameCell {
+  width: 30vw;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5vw;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.thinking {
+  cursor: not-allowed;
+}
