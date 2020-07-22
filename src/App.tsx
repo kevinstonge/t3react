@@ -24,8 +24,8 @@ class App extends React.Component<AppProps, AppState> {
       "gameState":"your turn",
       "firstPlayer":"p",
       "difficulty":"hard",
-      "pSymbol":"X",
-      "cSymbol":"O",
+      "pSymbol":"🙂",
+      "cSymbol":"🤖",
       "boardMap":new Array(9).fill("e"),
     };
   }

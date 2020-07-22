@@ -20,9 +20,10 @@ html,body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5vw;
+  font-size: 10vw;
   border: 1px solid white;
   cursor: pointer;
+  text-shadow: 0.2rem 0.2rem 0.5rem #000;
 }
 
 .thinking {

@@ -17,7 +17,7 @@ class Board extends React.Component<BoardProps, BoardState> {
                 {this.props["boardMap"].map((e,i)=>{
                     //TODO: update className based on contents of cell and gameStatus
                     return(<div key={`cell${i}`} className="gameCell" onClick={()=>this.props.update(i)}>
-                        {(e!=="e")?e:""}
+                        {(e!=="e")?(e==="p")?this.props.pSymbol:this.props.cSymbol:""}
                     </div>)
                 })}
                 </div>
